@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.*;
 
-import static java.util.stream.Collectors.toList;
 
 class Result {
 
@@ -22,9 +21,9 @@ class Result {
                 zero++;
             }
         }
-        System.out.println((double) pos /(pos+neg+zero));
-        System.out.println((double) neg /(pos+neg+zero));
-        System.out.println((double) zero /(pos+neg+zero));
+        System.out.println((double) pos / (pos + neg + zero));
+        System.out.println((double) neg / (pos + neg + zero));
+        System.out.println((double) zero / (pos + neg + zero));
     }
 
 }
