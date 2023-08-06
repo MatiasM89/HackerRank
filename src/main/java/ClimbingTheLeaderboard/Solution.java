@@ -10,23 +10,53 @@ import static java.util.stream.Collectors.toList;
 class Result {
 
     //This is not an optimal solution
+//    public static List<Integer> climbingLeaderboard(List<Integer> ranked, List<Integer> player) {
+//        List<Integer> places = new ArrayList<>();
+//        TreeMap<Integer, Integer> map = new TreeMap<>();
+//        for (Integer x : ranked) {
+//            map.put(x, null);
+//        }
+//        TreeMap<Integer, Integer> mapWithPlayerScore;
+//        for (Integer x : player) {
+//            mapWithPlayerScore = map;
+//            mapWithPlayerScore.put(x, null);
+//            int place = 1;
+//            for (Map.Entry<Integer, Integer> it : mapWithPlayerScore.descendingMap().entrySet()) {
+//                mapWithPlayerScore.put(it.getKey(), place);
+//                System.out.println(it.getKey() + " " + it.getValue());
+//                place++;
+//            }
+//            places.add(mapWithPlayerScore.get(x));
+//        }
+//        return places;
+//    }
+
+    //slight improvements
     public static List<Integer> climbingLeaderboard(List<Integer> ranked, List<Integer> player) {
         List<Integer> places = new ArrayList<>();
-        TreeMap<Integer, Integer> map = new TreeMap<>();
-        for (Integer x : ranked) {
-            map.put(x, null);
+        ArrayList<Integer> ranking = new ArrayList<>();
+        for (int j = 0; j < ranked.size(); j++) {
+            ranking.add(0);
         }
-        TreeMap<Integer, Integer> mapWithPlayerScore;
-        for (Integer x : player) {
-            mapWithPlayerScore = map;
-            mapWithPlayerScore.put(x, null);
-            int place = 1;
-            for (Map.Entry<Integer, Integer> it : mapWithPlayerScore.descendingMap().entrySet()) {
-                mapWithPlayerScore.put(it.getKey(), place);
-                System.out.println(it.getKey() + " " + it.getValue());
-                place++;
+        ranking.set(0, 1);
+        for (int i = 1; i < ranked.size(); i++) {
+            if (ranked.get(i) < ranked.get(i - 1)) {
+                ranking.set(i, ranking.get(i - 1) + 1);
+            } else {
+                ranking.set(i, ranking.get(i - 1));
             }
-            places.add(mapWithPlayerScore.get(x));
+        }
+        for (Integer result : player) {
+
+            int i = 0;
+            while (i < ranked.size() && result < ranked.get(i)) {
+                i++;
+            }
+            if (i == ranked.size()) {
+                places.add(ranking.get(ranking.size() - 1) + 1);
+                continue;
+            }
+            places.add(ranking.get(i));
         }
         return places;
     }
