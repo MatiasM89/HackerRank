@@ -9,15 +9,6 @@ import static java.util.stream.Collectors.toList;
 
 class Result {
     public static List<Integer> circularArrayRotation(List<Integer> a, int k, List<Integer> queries) {
-//        LinkedList<Integer> rotation = new LinkedList<>(a);
-//
-//        for (int i = 0; i < k; i++) {
-//            int last = rotation.get(rotation.size() - 1);
-//            for (int j = rotation.size() - 1; j > 0; j--) {
-//                rotation.set(j, rotation.get(j - 1));
-//            }
-//            rotation.set(0, last);
-//        }
 
         List<Integer> results = new LinkedList<>();
 
